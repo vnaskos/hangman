@@ -42,4 +42,5 @@ if($authenticated) {
 			</form>
 		</div>
 	</div>
-</div>
+</body>
+</html>

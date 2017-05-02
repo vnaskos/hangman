@@ -9,7 +9,7 @@ if(!$authenticated || ($authenticated && $user['role'] <= 0)) {
 	header('Location: ./users.php');
 }
 
-include("dbconnect.php");
+include("db_connect.php");
 
 /**
  *	Add a new word to the database
@@ -83,7 +83,7 @@ if( isset($_GET['action']) ) {
 		 */
 		if(isset($_GET['action']) && $_GET['action'] == 'select') { ?>
 			<form method="GET">
-				<label for="word">Λέξη:</label>
+				<label for="word">Word:</label>
 				<?php
 				$query = sprintf("SELECT * FROM word WHERE word_id = %d", $_GET['id']);
 				$result = mysql_query($query) or die("Query error: " . mysql_error());
@@ -96,7 +96,7 @@ if( isset($_GET['action']) ) {
 			</form>
 		<?php } else { ?>
 			<form method="GET">
-				<label for="word">Λέξη:</label>
+				<label for="word">Word:</label>
 				<input type="text" class="field" name="word" />
 				<input type="submit" class="btn" name="action" value="add" />
 				<div class="clear"></div>
@@ -115,8 +115,8 @@ if( isset($_GET['action']) ) {
 			<div class="game-row">
 				<div class="col10"><?php echo $row['word_id']; ?></div>
 				<div class="col50 nopadding"><?php echo $row['word']; ?></div>
-				<div class="col10"><a href="?action=delete&id=<?php echo $row['word_id']; ?>">ΔΙΑΓΡΑΦΗ</a></div>
-				<div class="col10"><a href="?action=select&id=<?php echo $row['word_id']; ?>">ΕΠΕΞΕΡΓΑΣΙΑ</a></div>
+				<div class="col10"><a href="?action=delete&id=<?php echo $row['word_id']; ?>">DELETE</a></div>
+				<div class="col10"><a href="?action=select&id=<?php echo $row['word_id']; ?>">EDIT</a></div>
 			</div>
 		<?php }
 		mysql_free_result($result); ?>

@@ -1,8 +1,8 @@
 <?php
 include("session.php");
 
-include("dbconnect.php");
-$game_id;
+include("db_connect.php");
+$game_id = null;
 
 /**
  *	Increase or decrease the difficulty
@@ -73,7 +73,6 @@ function getGameInfo() {
  *	Return all the needed information to display on the game board
  */
 function play() {
-	global $game_id;
 	$error = "";
 
 	$info = getGameInfo();
@@ -82,7 +81,7 @@ function play() {
 	
 	//Submit a letter
 	if(isset($_GET['letter'])) {
-		$error = sumbitLetter($word, $letters);
+		$error = submitLetter($word, $letters);
 	}
 	
 	$info  = getGameInfo();
@@ -104,20 +103,19 @@ function play() {
  *	Check if it's a hit or a miss
  *	and update the database
  */
-function sumbitLetter($word, $letters) {
+function submitLetter($word, $letters) {
 	global $game_id;
 	$letter =  mb_strtoupper($_GET['letter'], "utf-8");
 	
 	$len = mb_strlen( $letter, "utf-8" );
 	
 	if($len !=  1) {
-		return "Ένα γράμμα κάθε φορά!";
+		return "One letter per turn!";
 	}
 	if(in_array($letter, $letters)) {
-		return "Το γράμμα '" . $letter . "' έχει ήδη δοθεί!";
+		return "Letter '" . $letter . "' was already given";
 	}
-	
-	$score = 0;
+
 	$fail = 0;
 	
 	if(mb_strpos($word, $letter, 0, "utf-8") !== false) {
@@ -141,6 +139,10 @@ function sumbitLetter($word, $letters) {
 /**
  *	Get the word with hidden letters
  *	Example U_____A
+ *
+ * @param $word String      the hidden word
+ * @param $letters array    the letters which the player gave
+ * @return array            returns the masked word and a completion flag
  */
 function getDisplayedWord($word, $letters) {
 	$strlen = mb_strlen( $word, "utf-8" );
@@ -178,7 +180,7 @@ function getDisplayedWord($word, $letters) {
 		$game_id = $_GET['id'];
 		
 		/**
-		 *	Act accordigly to the selected action
+		 *	Act accordingly to the selected action
 		 *	-reset given letters / new game
 		 *	-reset game
 		 *	-adjust difficulty
@@ -217,22 +219,22 @@ function getDisplayedWord($word, $letters) {
 				<form method="GET" accept-charset="utf-8">
 					<input type="hidden" name="action" value="play" />
 					<input type="hidden" name="id" value="<?php echo $game_id; ?>" />
-					<label for="letter">Γράμμα:</label>
-					<input type="text" class="field" name="letter" autofocus/>
+					<label for="letter">Letter:</label>
+					<input type="text" class="field" id="letter" name="letter" autofocus/>
 					<input type="submit" class="btn" />
 				</form>
 				<div class="clear"></div>
 			<?php } ?>
 			
 			<?php $letters = $response['letters']; ?>
-			<label for="letter">Έχουν δοθεί:</label>
-			<input type="text" class="field" value="<?php echo $letters; ?>" readonly />
+			<label for="letters">Given letters:</label>
+			<input type="text" class="field" id="letters" value="<?php echo $letters; ?>" readonly />
 			
 			<div id="actions">
 				<a href="?action=reset&id=<?php echo $game_id; ?>" class="btn btn-action">Reset</a>
-				<a href="newGame.php?id=<?php echo $game_id; ?>" class="btn btn-action">Επόμενη</a>
-				<a href="?action=adjust&id=<?php echo $game_id; ?>&diff=1" class="btn btn-action">Πιο εύκολο</a>
-				<a href="?action=adjust&id=<?php echo $game_id; ?>&diff=-1" class="btn btn-action">Πιο δύσκολο</a>
+				<a href="new_game.php?id=<?php echo $game_id; ?>" class="btn btn-action">Next</a>
+				<a href="?action=adjust&id=<?php echo $game_id; ?>&diff=1" class="btn btn-action">Easier</a>
+				<a href="?action=adjust&id=<?php echo $game_id; ?>&diff=-1" class="btn btn-action">Harder</a>
 				<div class="clear"></div>
 			</div>
 			
@@ -248,12 +250,12 @@ function getDisplayedWord($word, $letters) {
 			<?php }
 			if($response['success']) { ?>
 				<div id="success">
-					<p><?php echo "Συγχαρητήρια!" ?></p>
+					<p><?php echo "Congratulations" ?></p>
 				</div>
 			<?php } ?>
 			<?php if($response['fails'] >= $response['difficulty']) { ?>
 				<div id="error">
-					<p><?php echo "Έχασες"; ?></p>
+					<p><?php echo "You lost"; ?></p>
 				</div>
 			<?php } ?>
 		</div>

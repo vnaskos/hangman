@@ -3,7 +3,7 @@ include("session.php");
 
 /**
  *	Check if user is logged in
- *	else play annonymously
+ *	else play anonymously
  */
 if($authenticated) {
 	$uid = $user['id'];
@@ -11,7 +11,7 @@ if($authenticated) {
 	$uid = 1;
 }
 
-include("dbconnect.php");
+include("db_connect.php");
 
 /**
  *	Create a new game
@@ -80,7 +80,7 @@ if(isset($_GET['id']) && $_GET['id']) {
 	<div id="game-board">
 		<h1 class="title"><a href="index.php">Hangman</a></h1>
 		<hr />
-		<h2>το παιχνίδι ξεκινάει ...</h2>
+		<h2>game starts ...</h2>
 	</div>
 </body>
 </html>

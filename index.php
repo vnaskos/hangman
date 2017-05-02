@@ -19,12 +19,12 @@
 		if($authenticated) { ?>
 			<a class="btn wide-btn" href="logout.php">Logout <?php echo $user['username']; ?></a>
 			<?php if($user['role'] > 0) { ?>
-				<a class="btn wide-btn" href="words.php">Λέξεις</a>
+				<a class="btn wide-btn" href="words.php">Words</a>
 			<?php } ?>
 		<?php } else { ?>
 			<a class="btn wide-btn" href="users.php">Login / Register</a>
 		<?php } ?>
-		<a class="btn wide-btn" href="newGame.php">Νέο παιχνίδι</a>
+		<a class="btn wide-btn" href="new_game.php">New Game</a>
 		<a class="btn wide-btn" href="scoreboard.php">Score Board</a>
 	</div>
 </body>

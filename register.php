@@ -3,7 +3,7 @@ if(!isset($_POST['action'])) {
 	header('Location: ./index.php');
 }
 
-include("dbconnect.php");
+include("db_connect.php");
 include("session.php");
 
 $username = $_POST['username'];

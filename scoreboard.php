@@ -18,7 +18,7 @@
 		</div>
 		<hr />
 		<?php
-		include("dbconnect.php");
+		include("db_connect.php");
 		
 		$per_page = 10; //Number of rows displayed per page
 		
@@ -52,7 +52,7 @@
 				<div class="col20"><?php echo $row['score']; ?></div>
 				<?php
 				if($authenticated && $user['role'] > 0) { ?>
-					<div class="col10"><a href="deleteGame.php?id=<?php echo $row['game_id']; ?>">ΔΙΑΓΡΑΦΗ</a></div>
+					<div class="col10"><a href="delete_game.php?id=<?php echo $row['game_id']; ?>">ΔΙΑΓΡΑΦΗ</a></div>
 				<?php }
 				?>
 			</div>

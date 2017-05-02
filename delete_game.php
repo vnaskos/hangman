@@ -11,13 +11,10 @@ if(!isset($_GET['id'])) {
 
 $game_id = $_GET['id'];
 
-include("dbconnect.php");
+include("db_connect.php");
 
 $query = sprintf("DELETE FROM game WHERE game_id = %d", $game_id);
 $result = mysql_query($query) or die("Query error: " . mysql_error());
 
 mysql_close();
 header('Location: ./scoreboard.php');
-?>
-
-
