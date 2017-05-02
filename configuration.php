@@ -1,6 +1,7 @@
 <?php
 /**
  * Project Configuration Settings
+ * https://github.com/vnaskos/hangman
  */
 
 /** DB CONFIGURATION **/
