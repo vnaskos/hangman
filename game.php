@@ -200,15 +200,15 @@ function getDisplayedWord($word, $letters) {
 			<hr />
 			<div id="stats">
 				<div class="col30">
-					<h3>Βαθμολογία</h3>
+					<h3>Score</h3>
 					<p><?php echo $response['score']; ?></p>
 				</div>
 				<div class="col30">
-					<h3>Λάθη</h3>
+					<h3>Fails</h3>
 					<p><?php echo $response['fails']; ?></p>
 				</div>
 				<div class="col30">
-					<h3>Δυσκολία</h3>
+					<h3>Difficulty</h3>
 					<p><?php echo $response['difficulty']; ?></p>
 				</div>
 			</div>
