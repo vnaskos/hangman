@@ -1,6 +1,9 @@
 # Hangman
 Simple hangman game written in PHP
 
+# Showcase
+![Showcase](https://cloud.githubusercontent.com/assets/6230644/25639613/2e60ea74-2f95-11e7-9b1d-f89725e3b93e.gif)
+
 # Setup
 1) Download the project
 2) Exctract it to your server's public directory (eg /var/www/html/hangman)
